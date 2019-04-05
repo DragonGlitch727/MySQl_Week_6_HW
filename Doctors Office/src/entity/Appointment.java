@@ -1,10 +1,10 @@
 package entity;
 
-public class Appointments {
+public class Appointment {
 	private int appointmentsId;
 	private String date_time;
 	
-	public Appointments(int appointmentsId, String date_time) {
+	public Appointment(int appointmentsId, String date_time) {
 		this.setAppointmentsId(appointmentsId);
 		this.setDate_time(date_time);
 	}
