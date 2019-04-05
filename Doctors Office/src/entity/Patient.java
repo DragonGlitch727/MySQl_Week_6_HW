@@ -12,10 +12,10 @@ public class Patient {
 	private String city;
 	private int zip;
 	private int phoneNumber;
-	private List<Appointments> appointments;
+	private List<Appointment> appointments;
 	private List<Insurance> insurance;
 	
-	public Patient(int patientId, String firstName, String lastName, String street, String state, String city, int zip, int phoneNumber, List<Appointments> appointments, List<Insurance> insurance) {
+	public Patient(int patientId, String firstName, String lastName, String street, String state, String city, int zip, int phoneNumber, List<Appointment> appointments, List<Insurance> insurance) {
 	this.setPatientId(patientId);
 	this.setFirstName(firstName);
 	this.setLastName(lastName);
@@ -92,11 +92,11 @@ public class Patient {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Appointments> getAppointments() {
+	public List<Appointment> getAppointments() {
 		return appointments;
 	}
 
-	public void setAppointments(List<Appointments> appointments) {
+	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
 	}
 
