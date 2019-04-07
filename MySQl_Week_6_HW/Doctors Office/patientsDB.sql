@@ -20,17 +20,17 @@ create table patients (
 
 create table insurance (
 	id int(12) not null auto_increment,
-	patient_id int(12) not null,
 	name varchar(20) not null,
 	description varchar(200),
 	primary key (id),
+    patient_id int(12) not null,
 	foreign key (patient_id) references patients(id)
 );
 
 create table appointments (
 	id int(15) not null auto_increment,
-	patient_id int(12) not null,
 	date_time datetime not null,
 	primary key (id),
+    patient_id int(12) not null,
 	foreign key (patient_id) references patients(id)
 );

@@ -11,33 +11,31 @@ import entity.Appointment;
 
 public class AppointmentsDao {
 	
-	private final String GET_APPOINTMENTS_BY_PATIENT_ID_QUERY = "SELECT * FROM appointments WHERE patient_id = ?";
-	private final String UPDATE_APPOINTMENTS_BY_PATIENT_ID_QUERY = "UPDATE appointments SET date_time = ? WHERE patient_id = ?";
-	private final String DELETE_APPOINTMENTS_BY_PATIENT_ID_QUERY = "DELETE FROM appointments WHERE patient_id = ?";
+	private final String GET_APPOINTMENTS_QUERY = "SELECT * FROM appointments WHERE id = ?";
 	private Connection connection;
 	
 	public AppointmentsDao() {
 		connection = DBConnection.getConnection();
 	}
 	
-	public List<Appointment> getAppointments(int patientId) throws SQLException {
-		ResultSet rs = connection.prepareStatement(GET_APPOINTMENTS_BY_PATIENT_ID_QUERY).executeQuery();
+	public List<Appointment> getAppointments() throws SQLException {
+		ResultSet rs = connection.prepareStatement(GET_APPOINTMENTS_QUERY).executeQuery();
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		
 		while (rs.next()) {
-			appointments.add(new Appointment(rs.getInt(1), rs.getString(3)));
+			appointments.add(allAppointments(rs.getInt(1), rs.getString(2)));
 		}
 		return appointments;
 	}
-	
-	public void updateAppointmentsByPatientId(int patientId) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(UPDATE_APPOINTMENTS_BY_PATIENT_ID_QUERY);
-		ps.setInt(1, appointmentsId);
-		ps.setDate_time(2, date_time);
-	}
 
-	public void deleteAppointmentByPatientId(int patientId) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(DELETE_APPOINTMENTS_BY_PATIENT_ID_QUERY);
-		ps.executeUpdate();
+	private Appointment allAppointments(int id, String date_time) {
+		return new Appointment(id, date_time);
+	}
+	public Appointment getAppointmentById(int id) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(GET_APPOINTMENTS_QUERY);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		return allAppointments(rs.getInt(1), rs.getString(2));
 	}
 }

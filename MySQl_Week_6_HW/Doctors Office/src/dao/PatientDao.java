@@ -19,8 +19,7 @@ public class PatientDao {
 	private final String CREATE_NEW_PATIENT_QUERY = (
 			"INSERT INTO patients(first_name, last_name, street, city, state, zip, phone_number) VALUES (? ? ? ? ? ? ?");
 	private final String DELETE_PATIENT_BY_ID_QUERY = "DELETE FROM patients WHERE id = ?";
-	private final String UPDATE_PATIENT_BY_ID_QUERY = "UPDATE patients SET first_name = ?, "
-			+ "last_name = ?, street = ?, city = ?, state = ?, zip = ?, phone_number = ? WHERE id = ?";
+	private final String UPDATE_PATIENT_BY_ID_QUERY = "UPDATE patients SET = ? WHERE id = ?";
 	private AppointmentsDao appointmentsDao = new AppointmentsDao();
 	private InsuranceDao insuranceDao = new InsuranceDao();
 	
@@ -61,36 +60,9 @@ public class PatientDao {
 					rs.getInt(8));
 	}
 	
-	public void createNewPatient(String firstName, String lastName, String street, String city, String state, int zip,
-			int phoneNumber) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_PATIENT_QUERY);
-		ps.setString(2, firstName);
-		ps.setString(3, lastName);		
-		ps.setString(4, street);
-		ps.setString(5, city);
-		ps.setString(6, state);
-		ps.setInt(7, zip);
-		ps.setInt(8, phoneNumber);
-		ps.executeUpdate();
-	}
-	
-	public void updatePatient(int patientId, String firstName, String lastName, String street, String city, String state, int zip,
-			int phoneNumber) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(UPDATE_PATIENT_BY_ID_QUERY);
-		ps.setInt(1, patientId);
-		ps.setString(2, firstName);
-		ps.setString(3, lastName);		
-		ps.setString(4, street);
-		ps.setString(5, city);
-		ps.setString(6, state);
-		ps.setInt(7, zip);
-		ps.setInt(8, phoneNumber);
-		ps.executeUpdate();
-	}
-	
-	public void deletePatient(int patientId) throws SQLException {
-		PreparedStatement ps = connection.prepareStatement(DELETE_PATIENT_BY_ID_QUERY);
-		ps.executeUpdate();
+	public void createNewPatient(String first_name, String last_name, String street, String city, String state, int zip,
+			int phone_number) throws SQLException {
+		
 	}
 	
 	private Patient populatePatient(int patientId, String firstName, String lastName, String street, String city, 
